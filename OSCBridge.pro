@@ -14,14 +14,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    log_policy.cpp \
-    debugwindow.cpp
+    debugwindow.cpp \
+    logger/log_policy.cpp
 
 HEADERS  += mainwindow.h \
-    logger.hpp \
-    log.hpp \
-    log_policy.h \
-    debugwindow.h
+    debugwindow.h \
+    logger/log.hpp \
+    logger/log_policy.h \
+    logger/logger.hpp
 
 FORMS    += mainwindow.ui \
     debugwindow.ui
@@ -31,3 +31,4 @@ FORMS    += mainwindow.ui \
 
 CONFIG += c++11
 QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
+

@@ -2,7 +2,7 @@
 
 #include "mainwindow.h"
 #include <QApplication>
-#include "logger.hpp"
+#include "logger/logger.hpp"
 
 int main(int argc, char *argv[])
 {
