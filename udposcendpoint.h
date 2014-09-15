@@ -34,19 +34,17 @@ private:
     boost::asio::ip::udp::endpoint remoteEndpoint;
     //pointer to io_Service
     std::shared_ptr<boost::asio::io_service> ptrIo;
-    //write mutex
-    std::mutex writeMutex;
     //marks current state of the instance
     STATE currentState;
 
-    void setState(STATE);
+    void setState(const STATE &);
 
 public:
     void start(uint16_t);
     void run();
     void stop();
     void handleReceive(const boost::system::error_code&, std::size_t);
-    STATE getState();
+    const STATE& getState();
     UdpOscEndpoint(const std::shared_ptr<boost::asio::io_service>&);
     ~UdpOscEndpoint();
 };

@@ -18,7 +18,11 @@ SOURCES += main.cpp\
     udposcendpoint.cpp \
     core.cpp \
     devicemapper.cpp \
-    bufferreader.cpp
+    bufferreader.cpp \
+    tcpdevice.cpp \
+    device.cpp \
+    oscaddressreader.cpp \
+    adddevicedialog.cpp
 
 HEADERS  += mainwindow.h \
     ioservicehandler.h \
@@ -29,9 +33,14 @@ HEADERS  += mainwindow.h \
     devicemapper.h \
     bufferreader.h \
     messagtypes.h \
-    oscpkt.hh
+    oscpkt.hh \
+    tcpdevice.h \
+    device.h \
+    oscaddressreader.h \
+    adddevicedialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    adddevicedialog.ui
 
 #QMAKE_CXXFLAGS = -std=c++11 -stdlib=libc++
 #QMAKE_LFLAGS = -std=c++11 -stdlib=libc++

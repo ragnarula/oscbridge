@@ -64,7 +64,7 @@ void UdpOscEndpoint::stop()
         return;
     }
     LOG(__PRETTY_FUNCTION__);
-    socket.reset();
+    socket->close();
     setState(STATE::STOPPED);
 }
 
@@ -85,7 +85,7 @@ void UdpOscEndpoint::handleReceive(const boost::system::error_code& error,
     run();
 }
 
-void UdpOscEndpoint::setState(UdpOscEndpoint::STATE _state)
+void UdpOscEndpoint::setState(const UdpOscEndpoint::STATE &_state)
 {
     if(currentState == _state){
         LOG(__PRETTY_FUNCTION__, " no change ", _state);
@@ -96,7 +96,7 @@ void UdpOscEndpoint::setState(UdpOscEndpoint::STATE _state)
     messaging::send<Server::STATE>(this,currentState);
 }
 
-UdpOscEndpoint::STATE UdpOscEndpoint::getState()
+const UdpOscEndpoint::STATE& UdpOscEndpoint::getState()
 {
     LOG(__PRETTY_FUNCTION__, " ", currentState);
     return currentState;

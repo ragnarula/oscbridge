@@ -319,7 +319,7 @@ public:
   };
 
   Message() { clear(); }
-  Message(const std::string &s, TimeTag tt = TimeTag::immediate()) : time_tag(tt), address(s), err(OK_NO_ERROR) {}
+  Message(const std::string &s, TimeTag tt = TimeTag::immediate()) :  time_tag(tt), address(s), err(OK_NO_ERROR) {}
   Message(const void *ptr, size_t sz, TimeTag tt = TimeTag::immediate()) { buildFromRawData(ptr, sz); time_tag = tt; }
 
   bool isOk() const { return err == OK_NO_ERROR; }

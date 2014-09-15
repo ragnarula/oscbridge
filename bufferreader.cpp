@@ -12,14 +12,13 @@ BufferReader::~BufferReader()
 
 void BufferReader::processBuffer(std::unique_ptr<oscpkt::PacketReader> _ptrPacketReader)
 {
-    LOG(__PRETTY_FUNCTION__);
+    LOG(__PRETTY_FUNCTION__, " ",std::this_thread::get_id());
     oscpkt::Message *msg;
     while (_ptrPacketReader->isOk() && (msg = _ptrPacketReader->popMessage()) != 0) {
-//        LOG(__PRETTY_FUNCTION__," ",msg->addressPattern(), msg->arg());
-        if(msg->arg().isStr()){
-            std::string s;
-            msg->arg().popStr(s);
-            LOG(s);
+        OscAddressReader addReader(*msg);
+        if(addReader.head() == "device"){
+            addReader.pop();
+            messaging::send<OscDeviceMessage>(this,OscDeviceMessage(*msg, addReader));
         }
     }
 }

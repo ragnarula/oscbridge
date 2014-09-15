@@ -39,10 +39,12 @@ void IOServiceHandler::stop()
 
 std::shared_ptr<boost::asio::io_service> IOServiceHandler::getIoService()
 {
+    LOG(__PRETTY_FUNCTION__);
     return ptrIo;
 }
 
 IOServiceHandler::~IOServiceHandler()
 {
+    LOG(__PRETTY_FUNCTION__);
     stop();
 }

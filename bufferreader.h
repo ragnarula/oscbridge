@@ -8,9 +8,11 @@
 #include "globals.h"
 #include "messaging.hpp"
 #include "messagtypes.h"
+#include "oscaddressreader.h"
 #include "oscpkt.hh"
 
-class BufferReader : public messaging::IMessageListener<BufferMessage>
+class BufferReader : public messaging::IMessageListener<BufferMessage>,
+        public messaging::IMessageContext<OscDeviceMessage>
 {
     void processBuffer(std::unique_ptr<oscpkt::PacketReader>);
     virtual void handleMessage(const BufferMessage&);

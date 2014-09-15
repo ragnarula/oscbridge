@@ -28,8 +28,40 @@ class IMessageContext {
     void detachListener( IMessageListener<T>* _listener);
     void dispatch(const T& _msg);
 public:
+    IMessageContext();
+    //copy
+    IMessageContext(const IMessageContext&);
+    //move
+    //operator=
+    IMessageContext& operator=(const IMessageContext&);
     ~IMessageContext();
 };
+
+template <typename T>
+IMessageContext<T>::IMessageContext(){}
+
+template <typename T>
+IMessageContext<T>::IMessageContext(const IMessageContext<T> &other) :
+    listeners(other.listeners)
+{
+    LOG(__PRETTY_FUNCTION__);
+    typename std::vector<IMessageListener<T>* >::iterator i;
+    for(i = listeners.begin(); i != listeners.end(); ++i){
+        (*i)->messaging::template IMessageListener<T>::attachContext(this);
+    }
+}
+
+template <typename T>
+IMessageContext<T>& IMessageContext<T>::operator=(const IMessageContext &other)
+{
+    LOG(__PRETTY_FUNCTION__);
+    listeners = other.listeners;
+    typename std::vector<IMessageListener<T>* >::iterator i;
+    for(i = listeners.begin(); i != listeners.end(); ++i){
+        (*i)->messaging::template IMessageListener<T>::attachContext(this);
+    }
+    return *this;
+}
 
 template <typename T>
 void IMessageContext<T>::attachListener( IMessageListener<T>* _listener)
@@ -66,6 +98,8 @@ IMessageContext<T>::~IMessageContext()
     }
 }
 
+//IMEssageListener Class
+
 template<typename T>
 class IMessageListener {
     friend class IMessageContext<T>;
@@ -82,9 +116,39 @@ class IMessageListener {
     void detachContext( IMessageContext<T>* _listener);
     virtual void handleMessage(const T&)  = 0;
 public:
+    IMessageListener();
+    //copy
+    IMessageListener(const IMessageListener&);
+    //move
+    //operator=
+    IMessageListener& operator=(const IMessageListener&);
     virtual ~IMessageListener();
-
 };
+
+template <typename T>
+IMessageListener<T>::IMessageListener(){}
+
+template <typename T>
+IMessageListener<T>::IMessageListener(const IMessageListener<T> &other) :
+    contexts(other.contexts)
+{
+    typename std::vector<IMessageContext<T>* >::iterator i;
+    for(i = contexts.begin(); i != contexts.end(); ++i){
+        (*i)->messaging::template IMessageContext<T>::attachListener(this);
+    }
+}
+
+template <typename T>
+IMessageListener<T>& IMessageListener<T>::operator=(const IMessageListener<T> &other)
+{
+    contexts = other.contexts;
+    typename std::vector<IMessageContext<T>* >::iterator i;
+    for(i = contexts.begin(); i != contexts.end(); ++i){
+        (*i)->messaging::template IMessageContext<T>::attachListener(this);
+    }
+    return *this;
+}
+
 
 template <typename T>
 void IMessageListener<T>::attachContext( IMessageContext<T>* _context)
