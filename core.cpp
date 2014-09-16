@@ -108,7 +108,7 @@ void Core::handleMessage(const DeviceStateMessage &_msg)
         break;
     case DEVICE_STATE::DISCONNECTED:
         LOG(__PRETTY_FUNCTION__, "Disconnected");
-        emit deviceStateChanged(_msg.name.c_str(), "Disonnected");
+        emit deviceStateChanged(_msg.name.c_str(), "Disconnected");
         break;
     case DEVICE_STATE::ERROR:
         LOG(__PRETTY_FUNCTION__, "Error");

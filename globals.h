@@ -1,6 +1,6 @@
-//#ifndef LOGGING_LEVEL_1
-//#define LOGGING_LEVEL_1
-//#endif
+#ifndef LOGGING_LEVEL_1
+#define LOGGING_LEVEL_1
+#endif
 
 #include "logger.hpp"
 
