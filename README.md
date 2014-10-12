@@ -22,3 +22,8 @@ This is an application that can recieve OSC (udp) messages and forward them to d
 + Once connected, send an OSC Message to the app on the selected port formatted in the following way:
 	````/device/<device name>/message "message to be sent to device"````
 + Newlines can be sent to devices by including ````\n```` in the message
+
+## Complie Dependencies
++ boost with asio
++ logger http://github.com/ragnarula/logger
++ messaging http://github.com/ragnarula/messaging
