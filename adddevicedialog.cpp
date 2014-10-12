@@ -28,10 +28,10 @@ void AddDeviceDialog::nameAvailable(bool available)
 {
     LOG(__PRETTY_FUNCTION__);
     if(available){
-        ui->nameTakenLabel->setText("Available");
+        ui->nameTakenLabel->setText("Valid");
         ui->buttonBox->buttons().at(0)->setEnabled(true);
     } else {
-        ui->nameTakenLabel->setText("Not available");
+        ui->nameTakenLabel->setText("Invalid");
         ui->buttonBox->buttons().at(0)->setEnabled(false);
     }
 }

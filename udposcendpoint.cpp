@@ -45,7 +45,7 @@ void UdpOscEndpoint::run()
         return;
 
     socket->async_receive_from( boost::asio::buffer(recieveBuffer), remoteEndpoint,
-                                boost::bind(&UdpOscEndpoint::handleReceive, this,
+                                boost::bind(&UdpOscEndpoint::handleReceive, shared_from_this(),
                                             boost::asio::placeholders::error,
                                             boost::asio::placeholders::bytes_transferred));
 }
@@ -74,9 +74,9 @@ void UdpOscEndpoint::handleReceive(const boost::system::error_code& error,
 {
     LOG(__PRETTY_FUNCTION__, " ", std::this_thread::get_id());
 
-    if(getState() == STATE::STOPPED)
+    if(getState() == STATE::STOPPED){
         return;
-
+    }
     if (error && error != boost::asio::error::message_size && error != boost::asio::error::operation_aborted){
         LOG_ERR(__PRETTY_FUNCTION__, " ",error.category().name(), " ", error.message().c_str());
         setState(STATE::ERROR);

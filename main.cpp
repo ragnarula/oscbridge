@@ -3,7 +3,6 @@
 #include <memory>
 #include <string>
 #include "adddevicedialog.h"
-#include "apppaths.h"
 #include "core.h"
 #include "globals.h"
 #include "mainwindow.h"
@@ -12,8 +11,8 @@ LOG_INIT
 
 int main(int argc, char *argv[])
 {
-    LOG_INST.register_policy(std::shared_ptr<logging::file_log_policy>(
-                                 new logging::file_log_policy(AppPaths::get_app_bundle_path()+"/execution.log")));
+    LOG_INST.register_policy(new logging::file_log_policy("execution.log"));
+
     QApplication a(argc, argv);
     Core core;
     MainWindow w;

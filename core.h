@@ -24,7 +24,7 @@ class Core : public QObject,
     //main io service handler and thread pool
     std::unique_ptr<IOServiceHandler> ptrIoServiceHandler;
     //OSC Endpoint for receiving instructions
-    std::unique_ptr<UdpOscEndpoint> ptrOscEndpoint;
+    std::shared_ptr<UdpOscEndpoint> ptrOscEndpoint;
     //Device manager, maps device id to device, contains devices
     BufferReader bufferReader;
     DeviceMapper mapper;

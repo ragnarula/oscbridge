@@ -50,7 +50,7 @@ void Core::removeDevice(const char *_device)
 void Core::checkName(const char *_name)
 {
     LOG(__PRETTY_FUNCTION__);
-    emit isNameAvailable(!mapper.nameTaken(std::string(_name)));
+    emit isNameAvailable(mapper.nameValid(std::string(_name)));
 }
 
 void Core::connect(const char *_name)

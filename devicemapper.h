@@ -24,7 +24,7 @@ public:
     ~DeviceMapper();
     void addDevice(const std::string&, std::shared_ptr<TcpDevice>);
     void removeDevice(const std::string&);
-    bool nameTaken(const std::string &);
+    bool nameValid(const std::string &);
     std::shared_ptr<TcpDevice> getDevice(const std::string &);
 };
 

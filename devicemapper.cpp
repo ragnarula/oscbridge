@@ -74,15 +74,16 @@ void DeviceMapper::removeDevice(const std::string &_name)
     messaging::send<DeviceRemovedMessage>(this,msg);
 }
 
-bool DeviceMapper::nameTaken(const std::string &_name)
+bool DeviceMapper::nameValid(const std::string &_name)
 {
     LOG(__PRETTY_FUNCTION__);
+
     std::string nameTrimmed = _name;
     nameTrimmed.erase(std::remove(nameTrimmed.begin(), nameTrimmed.end(), ' '), nameTrimmed.end());
-    if(devices.count(nameTrimmed) != 0){
-        return true;
-    }
-    return false;
+
+    if(nameTrimmed.empty() || devices.count(nameTrimmed) != 0)
+        return false;
+    return true;
 }
 
 std::shared_ptr<TcpDevice> DeviceMapper::getDevice(const std::string &_name)

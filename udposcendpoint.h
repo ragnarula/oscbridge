@@ -4,6 +4,7 @@
 #include <array>
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
+#include <memory>
 #include <mutex>
 #include <string>
 #include <thread>
@@ -20,7 +21,9 @@ public:
     };
 };
 
-class UdpOscEndpoint : public Server,
+class UdpOscEndpoint :
+        public Server,
+        public std::enable_shared_from_this<UdpOscEndpoint>,
         public messaging::IMessageContext<Server::STATE>,
         public messaging::IMessageContext<BufferMessage>
 {
