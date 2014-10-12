@@ -29,7 +29,7 @@ HEADERS  += mainwindow.h \
     udposcendpoint.h \
     core.h \
     globals.h \
-    messaging.hpp \
+#    messaging.hpp \
     devicemapper.h \
     bufferreader.h \
     messagtypes.h \
@@ -51,7 +51,8 @@ QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
 
 INCLUDEPATH += /usr/local/include
 
-INCLUDEPATH += $$PWD/../log
+INCLUDEPATH += $$PWD/../logger
+INCLUDEPATH += $$PWD/../messaging
 
 unix|win32: LIBS += -lboost_system -L/usr/local/lib
 #unix|win32: LIBS += /usr/local/lib/libboost_system.a
