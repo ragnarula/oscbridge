@@ -20,5 +20,5 @@ This is an application that can recieve OSC (udp) messages and forward them to d
 + Add a device
 + Select device and hit connect
 + Once connected, send an OSC Message to the app on the selected port formatted in the following way:
-	````/device/<device name>/message "message to be send to device"````
+	````/device/<device name>/message "message to be sent to device"````
 + Newlines can be sent to devices by including ````\n```` in the message
